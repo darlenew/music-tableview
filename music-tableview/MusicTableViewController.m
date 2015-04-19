@@ -67,15 +67,19 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+    
+    // get the song dictionary
+    NSDictionary *song = [self.songs objectAtIndex:indexPath.row];
 
     // title
-    [cell.textLabel setText: [[self.songs objectAtIndex:indexPath.row] objectForKey:@"track_title"]];
+    NSLog(@"%@", [song objectForKey:@"track_title"] );
+    [cell.textLabel setText: [song objectForKey:@"track_title"]];
 
     // artist
-     [cell.detailTextLabel setText: [[self.songs objectAtIndex:indexPath.row] objectForKey:@"track_artist"]];
+    [cell.detailTextLabel setText: [song objectForKey:@"track_artist"]];
     
     // image
-    NSString *thumbnail_url = [[self.songs objectAtIndex:indexPath.row] objectForKey:@"thumbnail_url"];
+    NSString *thumbnail_url = [song objectForKey:@"thumbnail_url"];
     NSLog(@"%@", thumbnail_url);
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnail_url]]];
     [cell.imageView setImage: image];
